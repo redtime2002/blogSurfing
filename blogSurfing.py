@@ -137,12 +137,15 @@ def surfingBlog():
 
     for i in range(0, 100):
 
-
         driver.get("http://www.naver.com")
 
         rand = randint(0,len(searchList)-1)
+
+        print("*****" + str(i+1) +"번째 검색어 : " + searchList[rand] + "*****")
         driver.find_element_by_xpath("//input[@id='query']").send_keys(searchList[rand])
         time.sleep(1 + randint(0, 2))
+
+
 
         driver.find_element_by_xpath("//button[@id='search_btn']").send_keys(Keys.ENTER)
         time.sleep(1 + randint(0, 2))
@@ -165,8 +168,6 @@ def surfingBlog():
                     focus_this_Window()
 
                     time.sleep(10 + randint(0, 10))
-                    element = driver.find_element_by_xpath("//a[text()='인쇄']")
-                    element.location_once_scrolled_into_view
 
                     time.sleep(10 + randint(0, 10))
 
