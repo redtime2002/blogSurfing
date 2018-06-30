@@ -19,9 +19,15 @@ senderPw = "naver!23"
 
 tmpTime = ""
 
+IdList = ["test_lee2" , "test_lee3", "redtime2002"]
+pwList = ["naver!23", "naver!23", "dlwlssud9089!"]
+
 searchList = ["안개속의숙녀호", "나이아가라폭포", "혼블라워",
               "프라임 타파웨어", "스마트 그릴", "월스트리트", "원적외선 쿡탑",
-              "마리나시티", "한국전쟁참전용사기념관"]
+              "마리나시티", "한국전쟁참전용사기념관", "디스틸러리디스트릭트",
+              "소어산공원", "루쉰공원", "피차이위엔거리", "링컨기념관",
+              "스미스소니언박물관", "스텔렌보쉬", "빅캣파크",
+              "커스텐보쉬", "타파웨어"]
 
 driver = webdriver.Chrome("C:\selenium\chromedriver.exe")
 
@@ -139,24 +145,49 @@ def surfingBlog():
 
         driver.get("http://www.naver.com")
 
+        time.sleep(1 + randint(0, 2))
+
+        if i != 0 :
+            driver.switch_to.frame(driver.find_element_by_xpath("//iframe[@id='minime']"))
+
+            waitForIsElementPresent("//a[@id='btn_logout']")
+            driver.find_element_by_xpath("//a[@id='btn_logout']").click()
+
+            driver.switch_to.default_content()
+
+        time.sleep(1 + randint(0, 1))
+
+        waitForIsElementPresent("//input[@id='id']")
+
+        loginRand = randint(0, len(IdList)-1)
+        driver.find_element_by_xpath("//input[@id='id']").send_keys(IdList[loginRand])
+        driver.find_element_by_xpath("//input[@id='pw']").send_keys(pwList[loginRand])
+
+        time.sleep(1 + randint(0, 1))
+
+        driver.find_element_by_xpath("//input[@title='로그인']").send_keys(Keys.ENTER)
+
+        time.sleep(1)
+
         rand = randint(0,len(searchList)-1)
 
-        print("***** " + str(i+1) +"번째 검색어 : " + searchList[rand] + "*****")
+        print();
+        print("************* " + str(i+1) +"번째 검색어 : " + searchList[rand] + "*************")
         driver.find_element_by_xpath("//input[@id='query']").send_keys(searchList[rand])
-        time.sleep(1 + randint(0, 2))
+  #      time.sleep(1 + randint(0, 2))
 
 
 
         driver.find_element_by_xpath("//button[@id='search_btn']").send_keys(Keys.ENTER)
-        time.sleep(1 + randint(0, 2))
+  #      time.sleep(1 + randint(0, 2))
 
         driver.find_element_by_xpath("//span[text()='블로그']").click()
 
         for page in range (1,100):
-            print("***** " + str(page + 1) + "번째 페이지 *****")
+            print("***** " + str(page) + "번째 페이지 *****")
 
             cnt = 0
-            time.sleep(5 + randint(0, 3))
+ #           time.sleep(5 + randint(0, 3))
 
             bloglist = driver.find_elements_by_xpath("//li[@class='sh_blog_top']")
 
@@ -169,9 +200,9 @@ def surfingBlog():
 
                     focus_this_Window()
 
-                    time.sleep(10 + randint(0, 10))
+  #                  time.sleep(10 + randint(0, 10))
 
-                    time.sleep(10 + randint(0, 10))
+ #                   time.sleep(10 + randint(0, 10))
 
                     driver.close()
 
@@ -186,7 +217,9 @@ def surfingBlog():
                 driver.find_element_by_xpath("//a[text()='다음페이지']").click()
                 continue
 
-    time.sleep(10)
+  #  time.sleep(10)
+
+
 
 
 surfingBlog()
