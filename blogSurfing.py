@@ -141,7 +141,7 @@ def surfingBlog():
 
         rand = randint(0,len(searchList)-1)
 
-        print("*****" + str(i+1) +"번째 검색어 : " + searchList[rand] + "*****")
+        print("***** " + str(i+1) +"번째 검색어 : " + searchList[rand] + "*****")
         driver.find_element_by_xpath("//input[@id='query']").send_keys(searchList[rand])
         time.sleep(1 + randint(0, 2))
 
@@ -153,6 +153,8 @@ def surfingBlog():
         driver.find_element_by_xpath("//span[text()='블로그']").click()
 
         for page in range (1,100):
+            print("***** " + str(page + 1) + "번째 페이지 *****")
+
             cnt = 0
             time.sleep(5 + randint(0, 3))
 
